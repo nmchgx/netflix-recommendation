@@ -19,7 +19,9 @@ def getRMSE():
     rfMatrix = np.dot(simMatrix, trainMatrix) / \
         np.dot(simMatrix, trainMatrixOne)
     rfMatrix = np.nan_to_num(rfMatrix)
-    print 'RMSE: %s' % rmse(rfMatrix, trainMatrix)
+    testMatrixOne = np.ones(testMatrix.shape, dtype='float32')
+    testMatrixOne[testMatrix == 0] = 0
+    print 'RMSE: %s' % rmse(rfMatrix * testMatrixOne, trainMatrix)
 
 
 def main():
